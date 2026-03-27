@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %} Historial {% endblock %}
+
+{% block content %} 
+
+        <header class="inventario-header">
+            <h1>Gestión de inventario</h1>
+            
+        </header>
+
+        <!-- Menu horizontal -->
+        <div class="menu-horizontal">
+            <a href="{% url 'inv_control' %}">Control de stock</a>
+            <a href="{% url 'inventario' %}">Carritos de compras</a>
+            <a href="{% url 'inv_historial' %}">Historial de movimientos</a>
+        </div>
+
+        <!-- Alerta abajo del menu horizonal -->
+        <div class="Alerta-inv">
+          <p class="Alerta-titulo">Productos con stock bajo o agotado:</p>
+          1 productos requieren atención
+          <a href="#">Ver detalles</a>
+        </div>
+
+        <!-- CONTENEDOR DEL LISTADO -->
+        <section class="inventario-container2">
+            <div class="inv-header">
+                <div>
+                    <h2>Estado de inventario</h2>
+                    <p>Productos y niveles de stock actuales</p>
+                </div>
+            </div>
+
+            <!-- Tarjetas de inventario -->
+            <div class="tarjetas-inv">
+                <div class="inv-info">
+                    <strong>Disco de freno</strong>
+                    <div class="extra">
+                        <span>SKU: DIS-HON-CB</span>
+                        <span>Stock: 25  / Mín: 5  </span>
+                        <span class="vl1">$90,000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tarjetas-inv">
+                <div class="inv-info">
+                    <strong>Llanta delantera</strong>
+                    <div class="extra">
+                        <span>SKU: LLN-MIC-27518</span>
+                        <span>Stock: 0 / Mín: 2 </span>
+                        <span class="vl1">$180,000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tarjetas-inv">
+                <div class="inv-info">
+                    <strong>Kit de cilindro 150cc</strong>
+                    <div class="extra">
+                        <span>SKU:KIT-CIL-YAM150</span>
+                        <span>Stock: 8  / Mín: 5</span>
+                        <span class="vl1">$280,000</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+{% endblock %}

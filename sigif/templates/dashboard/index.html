@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+    <header class="dashboard-header">
+        <h1>Dashboard</h1>
+        <p>Resumen general de tu negocio</p>
+    </header>
+    {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    <div class="Alerta">
+        Algunos productos están agotados o con stock bajo.
+        <a href="{% url 'inv_control' %}">Ver detalles</a>
+    </div>            
+
+    <section class="metricas">
+        <div class="tarjetas">
+            <h3>Usuarios Activos</h3>
+            <p class="valor">{{ active_users|default:"0" }}</p>
+            <span class="positivo">+5%</span>
+        </div>
+
+        <div class="tarjetas">
+            <h3>Productos</h3>
+            <p class="valor">{{ products_count|default:"0" }}</p>
+            <span class="neutral">+0%</span>
+        </div>
+
+        <div class="tarjetas">
+            <h3>Stock Bajo</h3>
+            <p class="valor">{{ low_stock_count|default:"0" }}</p>
+            <span class="negativo">-12%</span>
+        </div>
+
+        <div class="tarjetas">
+            <h3>Ventas del Mes</h3>
+            <p class="valor">${{ sales_this_month|default:"0.00" }}</p>
+            <span class="positivo">+8%</span>
+        </div>
+    </section>
+
+    <section class="bottom-sections">
+        <div class="Actividad-recientes">
+            <h2>Actividad Reciente</h2>
+            <ul>
+                <li>Nuevo usuario registrado: Juan Pérez</li>
+                <li>Producto "aceite10w30" actualizado</li>
+                <li>Factura #2345 generada</li>
+                <li>Producto "llanta" agotado</li>
+            </ul>
+        </div>
+
+        <div class="alertas-sistemas">
+            <h2>Alertas del Sistema</h2>
+            <ul>
+                <li>Backup programado para esta noche.</li>
+                <li>Actualización de sistema disponible.</li>
+                <li>3 productos requieren reabastecimiento.</li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %} inventario {% endblock %}
+
+{% block content %}
+
+        <header class="inventario-header">
+            <h1>Gestión de inventario</h1>
+        </header>
+
+        <!-- Menu horizontal -->
+        <div class="menu-horizontal">
+            <a href="{% url 'inv_control' %}">Control de stock</a>
+            <a href="{% url 'inventario' %}">Carritos de compras</a>
+            <a href="{% url 'inv_historial' %}">Historial de movimientos</a>
+        </div>
+
+        <div class="accion-agregar">
+            <button class="agregar">Agregar al carrito</button>
+        </div>
+
+        <!-- CONTENEDOR DEL LISTADO -->
+        <section class="inventario-container2">
+            <div class="inv-header">
+                <div>
+                    <h2>Carrito de compras</h2>
+                    <p>Productos seleccionados.</p>
+                </div>
+                <div class="total">
+                    <h2>Total: $362,950,00</h2>
+                    <p>Iva incluido*</p>
+                </div>
+                <div>
+                    <button class="pagar">Pagar</button>
+                </div>
+            </div>
+
+            <!-- Tarjetas de inventario -->
+            <div class="tarjetas-inv">
+                <div class="inv-info">
+                    <strong>Neumatico Trasero - Cross 21</strong>
+                    <div class="extra">
+                        <span>Cantidad: 50 Unidades.</span>
+                        <span>Precio Unitario: </span>
+                        <span class="vl1">$90,000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tarjetas-inv">
+                <div class="inv-info">
+                    <strong>Kit De arrastre</strong>
+                    <div class="extra">
+                        <span>Cantidad: 15 Unidades.</span>
+                        <span>Precio unitario: </span>
+                        <span class="vl1">$180,000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tarjetas-inv">
+                <div class="inv-info">
+                    <strong>Kit de cilindro 150cc</strong>
+                    <div class="extra">
+                        <span>Cantidad: 20 Unidades</span>
+                        <span>Precio unitario: </span>
+                        <span class="vl1">$35,000</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>base</title>
+  <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+
+<body>
+
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="{% static 'img/logo.png' %}" alt="">
+    </div>
+    <div class="user-Info">
+      <h3>Administrativo</h3>
+      <p>Oficina central</p>
+    </div>
+    <nav class="menu">
+      <ul>
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'usuarios' %}">Usuarios</a></li>
+        <li><a href="{% url 'productos' %}">Productos</a></li>
+        <li><a href="{% url 'inventario' %}">Inventario</a></li>
+        <li><a href="{% url 'mant' %}">Facturación</a></li>
+        <li><a href="{% url 'mant' %}">Auditoría</a></li>
+        <li><a href="{% url 'mant' %}">Configuración</a></li>
+      </ul>
+    </nav>
+    <div class="Cerrar-sesion">
+      <li> <a href="{% url 'login' %}" class="btn-logout"
+          onclick="return confirm('¿Estás seguro de que quieres cerrar sesión?')">Cerrar sesión</a></li>
+    </div>
+  </aside>
+
+  <div class="main-container">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+</body>
+
+</html>

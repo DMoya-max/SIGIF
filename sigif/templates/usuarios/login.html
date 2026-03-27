@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+
+    <div class="login-card">
+        <h1>Inicio de sesión</h1>
+        <p>Ingrese su usuario y contraseña</p>
+
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <label>Usuario</label>
+                <input type="text" name="user" required>
+            </div>
+
+            <div class="input-group">
+                <label>Contraseña</label>
+                <input type="password" name="clave" required>
+            </div>
+
+            <button type="submit" class="login-button">
+                Ingresar
+            </button>
+        </form>
+        <p>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        </p>
+    </div>
+
+</body>
+</html>

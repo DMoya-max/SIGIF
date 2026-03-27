@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} Productos {% endblock %}
+
+{% block content %}
+<header class="productos-header">
+    <h1>Gestión de productos</h1>
+    <p>Administra el catálogo de productos</p>
+</header>
+<a href="{% url 'crear_productos' %}" class="AP">
+    + crear producto
+</a>
+<section class="productos-lista">
+    <div class="productos-sub">
+        <div>
+            <h2>Catálogo de productos</h2>
+            <p>Lista de productos registrados en el sistema</p>
+        </div>
+
+        <input type="text" class="buscar" placeholder="🔍︎ Buscar productos por nombre o SKU...">
+    </div>
+
+    <div class="productos-grid">
+        {% for item in products %}
+        <article class="tarjeta-producto">
+            <div class="pro-info">
+                <strong class="nombre">{{ item.product.name }}</strong>
+                <span class="marca">{{ item.product.brand }}</span>
+                <span class="precio">${{ item.product.price }}</span>
+
+                <div class="extra">
+                    <span class="sku">SKU: {{ item.product.sku }}</span>
+                    <span class="stock">Stock: {{ item.stock }}</span>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
