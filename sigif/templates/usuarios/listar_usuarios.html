@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Usuarios{% endblock %}
+
+{% block content %}
+
+<h1>Usuarios</h1>
+
+<a href="{% url 'crear_usuarios' %}">➕ Crear nuevo usuario</a>
+
+<table border="1" cellpadding="10">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Contra</th>
+      <th>Cargo</th>
+      <th>Telefono</th>
+      <th>Activo</th>
+      <th>Fecha de inicio</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td>{{ user.id }}</td>
+      <td>{{ user.nombre }}</td>
+      <td>{{ user.contra }}</td>
+      <td>{{ user.cargo }}</td>
+      <td>{{ user.telefono }}</td>
+      <td>{{ user.activo }}</td>
+      <td>{{ user.fecha_inicio }}</td>
+      <td>
+        <a href="{% url 'editar_usuarios' user.id %}">✏️ Editar</a>
+
+        <form action="{% url 'eliminar_usuario' user.id %}" method="POST" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit">🗑 Eliminar</button>
+        </form>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="8">No hay usuarios</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

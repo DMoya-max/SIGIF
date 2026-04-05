@@ -5,9 +5,12 @@ class Usuarios (models.Model):
     contra = models.CharField(max_length=15)
     telefono = models.CharField(max_length=12)
     activo = models.BooleanField(default=True)
-    fecha_inicio = models.DateField(help_text="YYYY-MM-DD")
+    fecha_inicio = models.DateField(null=True, blank=True)
     CARGOS = (
         ("Admin", "ADMIN"),
         ("Empleado", "EMPLEADO"),
     )
     cargo = models.CharField(max_length=15, choices=CARGOS, default = "Empleado")
+
+    def __str__(self):
+        return self.nombre

@@ -19,7 +19,6 @@ def login_view(request):
     return render(request, "usuarios/login.html")
 
 def usuarios(request):
-
     return render(request, "usuarios/usuarios.html")
 
 def crear_usuarios(request):
@@ -30,16 +29,27 @@ def crear_usuarios(request):
             return redirect('listar_usuarios')
     else:
         form = UsuarioForm ()
-    return render(request, "usuarios/usuarios.html",  {'form': form})
+    return render(request, "usuarios/crear_usuarios.html",  {'form': form})
 
 def listar_usuarios(request):
     users = Usuarios.objects.all()
     return render(request, 'usuarios/listar_usuarios.html', {'users': users})
 
 def editar_usuarios(request, id):
-    users = get_object_or_404(Usuarios, id=id)
+    user = get_object_or_404(Usuarios, id=id)
     if request.method == 'POST':
-        users = UsuarioForm(request.POST, instance=Usuarios)
-        if  users.is_valid():
-            pass
-    
+        form = UsuarioForm(request.POST, instance=user)
+        if  form.is_valid():
+            form.save()
+            return redirect('listar_usuarios')
+    else:
+        form = UsuarioForm(instance=user)
+    return render(request, 'usuarios/editar_usuarios.html', {'form': form})
+
+def eliminar_usuario(request, id):
+    user = get_object_or_404(Usuarios, id=id)
+    if request.method == 'POST':
+        user.delete()
+        return redirect('listar_usuarios')
+    else:
+        return render(request, 'usuarios/eliminar_usuario.html', {'user': user})
