@@ -6,8 +6,8 @@
 {% block content %}
 
 <h1>Crear Usuario</h1>
-<a href="{% url 'listar_usuarios' %}">Ver usuarios</a>
 
+<a href="{% url 'usuarios' %}" class="back">Volver</a>
 <form method="POST">
     {% csrf_token %}
     {{ form.errors }}

@@ -1,38 +1,66 @@
-{% extends 'base.html' %}
-
-{% block title %} Usuarios {% endblock %}
-
+{% extends 'base.html' %} 
+{% block title %} Usuarios {% endblock %} 
 {% block content %}
 
-  <header class="usuarios-header">
-            <h1>Gestión de usuarios</h1>
-            <p>Administra los usuarios del sistema</p>
-        </header>
+<header class="usuarios-header">
+  <h1>Gestión de usuarios</h1>
+  <p>Administra los usuarios del sistema</p>
+</header>
 
-        <!-- CONTENEDOR DEL LISTADO -->
-        <section class="usuarios-container2">
+<!-- CONTENEDOR DEL LISTADO -->
+<section class="usuarios-container2">
+  <div class="usuarios-header">
+    <div>
+      <h2>Lista de usuarios</h2>
+      <p>Usuarios registrados en el sistema</p>
+    </div>
 
-            <div class="usuarios-header">
-                <div>
-                    <h2>Lista de usuarios</h2>
-                    <p>Usuarios registrados en el sistema</p>
-                </div>
+    <a href="{% url 'crear_usuarios' %}" class="btn-nuevo">
+      <span>👤</span> Nuevo Usuario
+    </a>
+  </div>
 
-                <a href="{% url 'crear_usuarios' %}" class="btn-nuevo">
-                    <span>👤</span> Nuevo Usuario
-                </a>
-            </div>
+  <!-- TARJETAS DE USUARIOS -->
+  <table border="1" cellpadding="10">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Cargo</th>
+        <th>Telefono</th>
+        <th>Activo</th>
+        <th>Fecha de inicio</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.nombre }}</td>
+        <td>{{ user.cargo }}</td>
+        <td>{{ user.telefono }}</td>
+        <td>{{ user.activo }}</td>
+        <td>{{ user.fecha_inicio }}</td>
+        <td>
+          <a href="{% url 'editar_usuarios' user.id %}">✏️ Editar</a>
 
-            <!-- TARJETAS DE USUARIOS -->
-            {% for user in users %}
-            <div class="tarjetas-usuario">
-                <div class="usu-info">
-                    <strong>{{ user.username }}</strong>
-                    <span>{{ user.email }}</span>
-                </div>
-                <span class="rol admin">{{ user.profile.role }}</span>
-            </div>
-            {% endfor %}
-
-        </section>
+          <form
+            action="{% url 'eliminar_usuario' user.id %}"
+            method="POST"
+            style="display: inline"
+          >
+            {% csrf_token %}
+            <button type="submit">🗑 Eliminar</button>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="8">No hay usuarios</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
 {% endblock %}
