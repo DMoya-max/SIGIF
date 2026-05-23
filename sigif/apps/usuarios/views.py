@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import UsuarioForm
@@ -8,15 +7,24 @@ def login_view(request):
     if request.method == "POST":
         usuario = request.POST.get("user")
         contra = request.POST.get("clave")
-
-        if usuario == "admin" and contra == "123":
+        try:
+            t = Usuarios.objects.get(nombre = usuario, contra = contra)
             messages.success(request, "Bienvenido al sistema")
+            request.session["logueado"] = {
+                "id":t.id,
+                "nombre": f"{t.nombre}",
+                "rol":t.cargo
+            }
             return redirect("dashboard")  
-        else:
+        except Usuarios.DoesNotExist:
             messages.error(request, "Usuario o contraseña incorrecto")
+            request.session["logueado"] = None
+            return redirect('login')     
+    else:
+        if request.session.get("logueado", False):
+            return redirect('dashboard')
+        else:
             return render(request, "usuarios/login.html")
-
-    return render(request, "usuarios/login.html")
 
 def usuarios(request):
     users = Usuarios.objects.all()
